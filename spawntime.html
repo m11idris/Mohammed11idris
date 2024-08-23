@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Time Since Birth</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            color: #333;
+            animation: fadeIn 1.5s ease-out;
+        }
+        h1 {
+            color: #ff7e5f;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        input[type="date"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            width: calc(100% - 22px);
+            box-sizing: border-box;
+            border: 2px solid #ff7e5f;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #ff7e5f;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #feb47b;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            animation: fadeIn 2s ease-out;
+        }
+        .result p {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #ff7e5f;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculate Time Since Birth</h1>
+        <label for="birthDate">Enter Your Birth Date:</label>
+        <input type="date" id="birthDate" name="birthDate">
+        <button onclick="calculateTime()">Calculate</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateTime() {
+            const birthDateInput = document.getElementById('birthDate').value;
+            if (!birthDateInput) {
+                document.getElementById('result').innerHTML = '<p style="color: red;">Please enter a birth date.</p>';
+                return;
+            }
+
+            const birthDate = new Date(birthDateInput);
+            const now = new Date();
+            const totalSeconds = Math.floor((now - birthDate) / 1000);
+
+            const secondsInMinute = 60;
+            const secondsInHour = 60 * 60;
+            const secondsInDay = 24 * 60 * 60;
+            const secondsInWeek = 7 * 24 * 60 * 60;
+            const secondsInYear = 365 * 24 * 60 * 60;
+
+            const years = Math.floor(totalSeconds / secondsInYear);
+            const weeks = Math.floor(totalSeconds / secondsInWeek);
+            const days = Math.floor(totalSeconds / secondsInDay);
+            const hours = Math.floor(totalSeconds / secondsInHour);
+            const seconds = totalSeconds % secondsInHour;
+
+            let resultText = `
+                <p><strong>Time elapsed since birth:</strong></p>
+                <p>${years} years</p>
+                <p>${weeks} weeks</p>
+                <p>${days} days</p>
+                <p>${hours} hours</p>
+                <p>${seconds} seconds</p>
+            `;
+
+            if (years >= 18) {
+                resultText += '<p class="highlight">Buddha hora bhai!</p>';
+            }
+
+            document.getElementById('result').innerHTML = resultText;
+        }
+    </script>
+	<center><h4>made by idrees</h4></center>
+</body>
+</html>
